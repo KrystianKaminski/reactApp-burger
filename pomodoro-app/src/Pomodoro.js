@@ -3,7 +3,7 @@ import './Pomodoro.css'
 
 class Pomodoro extends Component {
     state = {
-        pomodoroTime: 20,
+        pomodoroTime: .1,
         remainingTime: 0,
         donePomodoros: 0,
         breakTime: null,
@@ -27,6 +27,16 @@ class Pomodoro extends Component {
         clearInterval(this.intervalId)
     }
 
+    donePomodoro = () => {
+        if (this.state.remainingTime === -1) {
+            this.stopCountdown()
+            this.setState({
+                donePomodoros: this.state.donePomodoros + 1,
+                remainingTime: this.state.pomodoroTime * 60
+            })
+        }
+    }
+
     tick = () => {
         const minutes = Math.floor(this.state.remainingTime / 60)
         const seconds = this.state.remainingTime - minutes * 60
@@ -36,6 +46,7 @@ class Pomodoro extends Component {
             minutes: minutes < 10 ? "0" + minutes : minutes,
             seconds: seconds < 10 ? "0" + seconds : seconds
         })
+        this.donePomodoro()
     }
 
     render() {
