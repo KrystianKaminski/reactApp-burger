@@ -23,10 +23,15 @@ class Pomodoro extends Component {
         this.intervalId = setInterval(this.tick, 1000)
     }
 
+    stopCountdown = () => {
+        clearInterval(this.intervalId)
+    }
+
     tick = () => {
         const minutes = Math.floor(this.state.remainingTime / 60)
         const seconds = this.state.remainingTime - minutes * 60
         this.setState({
+            ticking: true,
             remainingTime: this.state.remainingTime - 1,
             minutes: minutes < 10 ? "0" + minutes : minutes,
             seconds: seconds < 10 ? "0" + seconds : seconds
@@ -49,9 +54,18 @@ class Pomodoro extends Component {
                         }
                     </span>
                     <span>{this.state.donePomodoros}</span>
-                    <button
-                        onClick={this.startCountdown}
-                    >Start</button>
+                    <div
+                        className="PomodoroControls"
+                    >
+                        <button
+                            onClick={this.startCountdown}
+                        >Start
+                    </button>
+                        <button
+                            onClick={this.stopCountdown}
+                        >Stop
+                    </button>
+                    </div>
                 </div>
             </div>
         )
