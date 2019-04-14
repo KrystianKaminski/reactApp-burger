@@ -1,0 +1,18 @@
+.NewTask {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.NewTask h2 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 30px;
+}
+
+.NewTask input {
+    height: 20px;
+    width: 30%;
+}
