@@ -8,7 +8,9 @@ class Pomodoro extends Component {
         donePomodoros: 0,
         breakTime: null,
         dailyGoal: null,
-        ticking: false
+        ticking: false,
+        minutes: null,
+        seconds: null,
     }
 
     componentDidMount() {
@@ -19,15 +21,15 @@ class Pomodoro extends Component {
 
     startCountdown = () => {
         this.intervalId = setInterval(this.tick, 1000)
-        this.setState({
-            remainingTime: this.state.remainingTime - 1,
-        })
-
     }
 
     tick = () => {
+        const minutes = Math.floor(this.state.remainingTime / 60)
+        const seconds = this.state.remainingTime - minutes * 60
         this.setState({
-            remainingTime: this.state.remainingTime - 1
+            remainingTime: this.state.remainingTime - 1,
+            minutes: minutes < 10 ? "0" + minutes : minutes,
+            seconds: seconds < 10 ? "0" + seconds : seconds
         })
     }
 
@@ -38,7 +40,14 @@ class Pomodoro extends Component {
             >
                 <h1>Pomodoro App</h1>
                 <div>
-                    <span>{this.state.remainingTime}</span>
+                    <span>
+                        {
+                            this.state.minutes ? `${this.state.minutes}:` : 'Click start!'
+                        }
+                        {
+                            this.state.seconds
+                        }
+                    </span>
                     <span>{this.state.donePomodoros}</span>
                     <button
                         onClick={this.startCountdown}
