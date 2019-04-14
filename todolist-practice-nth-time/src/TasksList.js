@@ -9,10 +9,14 @@ const TasksList = props => {
             {props.tasks &&
                 props.tasks.map(task => (
                     <li
+                        style={{
+                            textDecoration: task.completed ? 'line-through' : 'none'
+                        }}
                         key={task.key}
+                        onClick={() => props.clicked(task.key)}
                     >{task.todo}
                         <button
-                            onClick={() => props.delete(task.key)}
+                            onClick={(e) => props.delete(e, task.key)}
                         >X</button>
                     </li>
                 ))

@@ -17,7 +17,8 @@ class App extends Component {
 
   createNewTask = text => ({
     todo: text,
-    key: Date.now()
+    key: Date.now(),
+    completed: false
   })
 
   onClickHandler = () => {
@@ -27,7 +28,25 @@ class App extends Component {
     })
   }
 
-  deleteTask = (id) => {
+  onTaskClickHandler = (taskKey) =>
+    this.setState({
+      tasksArray: this.state.tasksArray.map(task =>
+        task.key === taskKey ?
+          {
+            ...task,
+            completed: !task.completed
+          }
+          : task
+      )
+
+    })
+
+  alertHandler = () => {
+    alert('You must add something!')
+  }
+
+  deleteTask = (e, id) => {
+    e.stopPropagation()
     this.setState({
       tasksArray: this.state.tasksArray.filter(task => task.key !== id)
     })
@@ -40,10 +59,12 @@ class App extends Component {
           changeHandler={this.onChangeHandler}
           clicked={this.onClickHandler}
           value={this.state.task}
+          alert={this.alertHandler}
         />
         <TasksList
           tasks={this.state.tasksArray}
           delete={this.deleteTask}
+          clicked={this.onTaskClickHandler}
         />
       </div>
     );

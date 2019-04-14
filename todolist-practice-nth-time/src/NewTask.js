@@ -13,7 +13,7 @@ const NewTask = (props) => {
                 value={props.value}
             />
             <button
-                onClick={props.clicked}
+                onClick={props.value ? props.clicked : props.alert}
             >
                 Add task
             </button>
