@@ -11,7 +11,9 @@ const TasksList = props => {
                     <li
                         key={task.key}
                     >{task.todo}
-                        <button>X</button>
+                        <button
+                            onClick={() => props.delete(task.key)}
+                        >X</button>
                     </li>
                 ))
             }

@@ -6,8 +6,7 @@ class App extends Component {
 
   state = {
     task: '',
-    tasksArray: [],
-    taskId: null
+    tasksArray: []
   }
 
   onChangeHandler = (e) => {
@@ -28,6 +27,12 @@ class App extends Component {
     })
   }
 
+  deleteTask = (id) => {
+    this.setState({
+      tasksArray: this.state.tasksArray.filter(task => task.key !== id)
+    })
+  }
+
   render() {
     return (
       <div>
@@ -38,6 +43,7 @@ class App extends Component {
         />
         <TasksList
           tasks={this.state.tasksArray}
+          delete={this.deleteTask}
         />
       </div>
     );
