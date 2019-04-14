@@ -10,7 +10,13 @@ const NewTask = (props) => {
             <input
                 type="text"
                 onChange={props.changeHandler}
+                value={props.value}
             />
+            <button
+                onClick={props.clicked}
+            >
+                Add task
+            </button>
         </div>
     )
 }
