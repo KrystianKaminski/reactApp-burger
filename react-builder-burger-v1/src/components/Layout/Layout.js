@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Aux from '../../hoc/Aux'
+import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
 import classes from './Layout.module.css'
 
 const Layout = (props) => (
-    <Aux>
+    <Auxiliary>
         <div>
             Toolbar, SideDrawer, Backdrop
     </div>
@@ -13,7 +13,7 @@ const Layout = (props) => (
                 props.children
             }
         </main>
-    </Aux>
+    </Auxiliary>
 )
 
 export default Layout
